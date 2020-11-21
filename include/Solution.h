@@ -1,6 +1,11 @@
 #ifndef SOLUTION_H
 #define SOLUTION_H
 
+#include"Problem.h"
+#include<vector>
+
+using namespace std;
+
 
 class Solution
 {

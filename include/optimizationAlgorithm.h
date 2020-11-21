@@ -1,6 +1,9 @@
 #ifndef OPTIMIZATIONALGORITHM_H
 #define OPTIMIZATIONALGORITHM_H
-
+#include"Solution.h"
+#include"SetUpParams.h"
+#include<vector>
+using namespace std;
 
 class optimizationAlgorithm
 {

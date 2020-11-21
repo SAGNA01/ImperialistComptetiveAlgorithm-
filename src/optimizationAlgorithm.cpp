@@ -1,6 +1,6 @@
 #include "optimizationAlgorithm.h"
 
-optimizationAlgorithm::optimizationAlgorithm()
+optimizationAlgorithm::optimizationAlgorithm(const Problem& pbm,const SetUpParams& setup) : _setup{setup}
 {
 
 }
