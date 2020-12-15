@@ -1,0 +1,35 @@
+# depslib dependency file v1.0
+1607994425 source:d:\202021\uha\ia\projet-cb\ica-project\src\problem.cpp
+	"Problem.h"
+
+1607994559 d:\202021\uha\ia\projet-cb\ica-project\include\problem.h
+	<iostream>
+	"SetUpParams.h"
+
+1607983544 source:d:\202021\uha\ia\projet-cb\ica-project\src\setupparams.cpp
+	"SetUpParams.h"
+	<cmath>
+
+1607983515 d:\202021\uha\ia\projet-cb\ica-project\include\setupparams.h
+	<iostream>
+
+1606002209 source:d:\202021\uha\ia\projet-cb\ica-project\src\optimizationalgorithm.cpp
+	"optimizationAlgorithm.h"
+
+1606001712 d:\202021\uha\ia\projet-cb\ica-project\include\optimizationalgorithm.h
+	"Solution.h"
+	"SetUpParams.h"
+	<vector>
+
+1606001639 d:\202021\uha\ia\projet-cb\ica-project\include\solution.h
+	"Problem.h"
+	<vector>
+
+1606010570 source:d:\202021\uha\ia\projet-cb\ica-project\src\solution.cpp
+	"Solution.h"
+
+1607993751 source:d:\202021\uha\ia\projet-cb\ica-project\src\ica.cpp
+	<iostream>
+	"Problem.h"
+	"SetUpParams.h"
+
