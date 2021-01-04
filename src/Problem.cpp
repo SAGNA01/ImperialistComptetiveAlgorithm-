@@ -1,17 +1,22 @@
 #include "Problem.h"
 
-//Problem::Problem() : _dimension{30}, _LowerLimit{-2.048}, _UpperLimit{2.048}, _numfunction{3}
-//{}
-
-Problem::Problem(int dimension, double LowerLimit, double UpperLimit, int numfunction) : _dimension{dimension},
-                                                                                         _LowerLimit{LowerLimit},
-                                                                                         _UpperLimit{UpperLimit},
-                                                                                         _numfunction{numfunction}
+Problem::Problem() : _dimension{30}, _LowerLimit{-2.048}, _UpperLimit{2.048}, _numFonction{1}
 {}
 
-Problem::Problem(int dimension, int numfunction) : _dimension{dimension}, _numfunction{numfunction}
+Problem::Problem(int dimension, double LowerLimit, double UpperLimit, int numFonction) : _dimension{dimension},
+                                                                                         _LowerLimit{LowerLimit},
+                                                                                         _UpperLimit{UpperLimit},
+                                                                                         _numFonction{numFonction}
+{}
+Problem::~Problem()
 {
-   switch (_numfunction)
+
+}
+
+
+Problem::Problem(int dimension, int numFonction) : _dimension{dimension}, _numFonction{numFonction}
+{
+   switch (_numFonction)
 	{
 	case 1: // Rosenbrock
 		_LowerLimit = -2.048;
@@ -45,9 +50,9 @@ int Problem::getDimension() const
     return _dimension;
 }
 
-int Problem::getNumerofunction() const
+int Problem::getNumeroFonction() const
 {
-    return _numfunction;
+    return _numFonction;
 }
 
 double Problem::getLowerLimit() const
@@ -68,50 +73,50 @@ void Problem::setUpperLimit(double valeur)
 {
     _UpperLimit = valeur;
 }
-void Problem::setNumerofunction(int num)
+void Problem::setNumeroFonction(int num)
 {
-    _numfunction = num;
+    _numFonction = num;
 }
-void Problem::afficherParametres(std::ostream& ost, const Problem& pbm)
+ostream& operator<<(ostream& ost, Problem& pbm)
 {
-    ost << "\t\t\t Function id : " << pbm.getNumerofunction()<<std::endl;
-    ost << "\t\t\t LowerLimit : " << pbm.getLowerLimit()<<std::endl;
-    ost << "\t\t\t UpperLimit : " << pbm.getUpperLimit()<<std::endl;
+    ost << "\t\t\t La taille du prob: " << pbm.getDimension()<<endl;
+    ost << "\t\t\t LowerLimit : " << pbm.getLowerLimit()<<endl;
+    ost << "\t\t\t UpperLimit : " << pbm.getUpperLimit()<<endl;
 }
 
-void Problem::saisirParametres(std::istream& ist, Problem pbm)
+istream& operator>>(istream& ist, Problem& pbm)
 {
-    std::cout<<"\t\t\t Function id : ";
-    ist>>pbm._numfunction;
-    switch (pbm._numfunction)
+    cout<<"\t\t\t Function id : ";
+    ist>>pbm._numFonction;
+    switch (pbm._numFonction)
 	{
 	case 1: // Rosenbrock
-	    std::cout<<"\t\t\t Rosenbrock function\n";
+	    cout<<"\t\t\t Rosenbrock function\n";
 		pbm.getLowerLimit();
 		pbm.getUpperLimit();
 		break;
 	case 2: // Rastrigin
-	    std::cout<<"\t\t\t Rastrigin function\n";
+	    cout<<"\t\t\t Rastrigin function\n";
 		pbm.getLowerLimit();
 		pbm.getUpperLimit();
 		break;
 	case 3: // Ackley
-	    std::cout<<"\t\t\t Ackley function\n";
+	    cout<<"\t\t\t Ackley function\n";
 		pbm.getLowerLimit();
 		pbm.getUpperLimit();
 		break;
 	case 4: // Schwefel
-	    std::cout<<"\t\t\t Schwefel function\n";
+	    cout<<"\t\t\t Schwefel function\n";
 		pbm.setLowerLimit(-500);
 		pbm.setUpperLimit(500);
 		break;
 	case 5: // schaffer
-	    std::cout<<"\t\t\t schaffer function\n";
+	    cout<<"\t\t\t schaffer function\n";
 		pbm.setLowerLimit(-100);
 		pbm.setUpperLimit(100);
 		break;
 	case 6: // Weierstrass
-	    std::cout<<"\t\t\t Weierstrass function\n";
+	    cout<<"\t\t\t Weierstrass function\n";
 		pbm.setLowerLimit(-30);
 		pbm.setUpperLimit(30);
 		break;

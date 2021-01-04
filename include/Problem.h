@@ -1,35 +1,40 @@
 #ifndef PROBLEM_H
 #define PROBLEM_H
 #include <iostream>
-#include"SetUpParams.h"
+#include<vector>
+#include <ctime>
 
+
+using namespace std;
 class Problem
 {
     public:
         //Constructeur du problème
-        //Problem();
-        Problem(int dimension, double LowerLimit, double UpperLimit, int numfunction);
-        Problem(int dimension, int numfunction);
+        Problem();
+        virtual ~Problem();
+        Problem(int dimension, double LowerLimit, double UpperLimit, int numFonction);
+        Problem(int dimension, int numFunction);
         // Accesseurs de paramètres
         int getDimension() const;
-        int getNumerofunction() const;
+        int getNumeroFonction() const;
         double getLowerLimit() const;
         double getUpperLimit() const;
 
-        // Les mutateurs
+        //Les mutateurs
         void setLowerLimit(double valeur);
         void setUpperLimit(double valeur);
-        void setNumerofunction(int num);
+        void setNumeroFonction(int num);
 
+        friend ostream& operator<<(ostream& ost, Problem& pbm);
+        friend istream& operator>>(istream& ist, Problem& pbm);
 
-        void afficherParametres(std::ostream& ost, const Problem& pbm);
-        void saisirParametres(std::istream& ist, const Problem pbm);
-
-        int _numfunction;
+        int _numFonction;
     private:
         int _dimension;
 		double _LowerLimit;
 		double _UpperLimit;
+		double _imperialistCost;
+	    double _totalCost;
 
 };
 

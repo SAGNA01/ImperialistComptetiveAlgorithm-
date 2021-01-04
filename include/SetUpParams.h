@@ -1,35 +1,46 @@
 #ifndef SETUPPARAMS_H
 #define SETUPPARAMS_H
 #include<iostream>
-
+#include <cmath>
+using namespace std;
 
 class SetUpParams
 {
+public:
+    SetUpParams();
+    SetUpParams(unsigned int independent_runs, unsigned int number_of_iterations,unsigned int number_of_countries, unsigned int number_of_empires);
+     double get_assimilation_rate()const;
+     double get_revolution_rate ()const;
+     double get_alpha_rate ()const;
+     double get_revolution_probability ()const;
+     double get_neighbourhood_radius ()const;
+     double get_constant_gravitation()const;
 
-    unsigned int _independent_runs;         //number of independent runs
-	unsigned int _nb_evolution_steps;      // number of iterations per run
-	unsigned int _population_size;		  // number of solutions in the population
-	unsigned int _solution_size;	     // size of each particle
+    unsigned int get_independent_runs()const;
+    unsigned int get_number_of_iterations()const;
+    unsigned int get_number_of_countries()const;
+    unsigned int get_number_of_empires()const;
 
-    public:
-        // Constructeurs des paramaètres
-        SetUpParams();
-        SetUpParams(unsigned int ind_runs, unsigned int nbEvolu_steps, unsigned int population_size, unsigned int solution_size);
-        // Accesseurs des paramètres
-        const unsigned int getIndependent_runs() const;
-		const unsigned int getNb_evolution_steps() const;
-		const unsigned int getPopulation_size() const;
-		const unsigned int getSolution_size() const;
-		// Modificateurs des paramètres
-		void setIndependent_runs(const unsigned int val);
-		void setNb_evolution_steps(const unsigned int val);
-		void setPopulation_size(const unsigned int val);
-		void setSolution_size(const unsigned int val);
-        ~SetUpParams(); // Destructeur
+    void set_independent_runs(unsigned int independent_runs);
+    void set_number_of_iterations(unsigned int number_of_iterations);
+    void set_number_of_countries(unsigned int number_of_countries);
+    void set_number_of_empires(unsigned int number_of_empires);
 
-        friend std::ostream& operator <<(std::ostream& ist, SetUpParams& setup);
-        friend std::istream& operator >>(std::istream& ist, SetUpParams setup);
+    virtual ~SetUpParams();
+    friend istream& operator >>(istream& ist, SetUpParams& setup);
+protected:
 
+private:
+     double assimilation_rate = 0.6;
+     double revolution_rate = 0.6;
+     double alpha_rate = 0.8;
+     double revolution_probability = 0.7;
+     double neighbourhood_radius = 0.1;
+     double constant_gravitation= 6.672;
+    unsigned int _independent_runs;
+    unsigned int _number_of_iterations;
+    unsigned int _number_of_countries;
+    unsigned int _number_of_empires ;
 };
 
 #endif // SETUPPARAMS_H

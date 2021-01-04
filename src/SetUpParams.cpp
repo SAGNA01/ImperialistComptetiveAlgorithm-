@@ -1,94 +1,108 @@
 #include "SetUpParams.h"
 
-//#define _USE_MATH_DEFINES
-#include <cmath>
-SetUpParams::SetUpParams() : _independent_runs(30), _nb_evolution_steps((int)((2 * pow(10, 6)) / 200)),
-                             _population_size(200), _solution_size(30)
-
+SetUpParams::SetUpParams():_independent_runs(1), _number_of_iterations((int)(2000)),
+    _number_of_countries(200), _number_of_empires(8)
+{
+    //ctor
+}
+SetUpParams::SetUpParams(unsigned int independent_runs, unsigned int number_of_iterations,unsigned int number_of_countries, unsigned int number_of_empires):_independent_runs(independent_runs), _number_of_iterations(number_of_iterations),
+    _number_of_countries(number_of_countries), _number_of_empires(number_of_empires)
 {
 
 }
-SetUpParams::SetUpParams(unsigned int ind_runs, unsigned int nbEvolu_steps,
-                         unsigned int population_size, unsigned int solution_size):
 
-                         _independent_runs{ind_runs},
-                         _nb_evolution_steps{(int)((2 * pow(10, 6) / _population_size))},
-                         _population_size{population_size},
-                         _solution_size{solution_size}
-{}
+double SetUpParams::get_assimilation_rate() const
+{
+    return assimilation_rate;
+}
 
-const unsigned int SetUpParams::getIndependent_runs() const
+double SetUpParams::get_revolution_rate() const
+{
+    return revolution_rate;
+}
+
+double SetUpParams::get_alpha_rate() const
+{
+    return alpha_rate;
+}
+
+double SetUpParams::get_revolution_probability() const
+{
+    return revolution_probability;
+}
+
+double SetUpParams::get_neighbourhood_radius() const
+{
+    return neighbourhood_radius;
+}
+
+double SetUpParams::get_constant_gravitation() const
+{
+    return  constant_gravitation;
+}
+
+unsigned int SetUpParams::get_independent_runs() const
 {
     return _independent_runs;
 }
 
-const unsigned int SetUpParams::getNb_evolution_steps() const
+unsigned int SetUpParams::get_number_of_iterations() const
 {
-    return _nb_evolution_steps;
+    return _number_of_iterations;
 }
 
-const unsigned int SetUpParams::getPopulation_size() const
+unsigned int SetUpParams::get_number_of_countries() const
 {
-    return _population_size;
+    return _number_of_countries;
 }
 
-const unsigned int SetUpParams::getSolution_size() const
+unsigned int SetUpParams::get_number_of_empires() const
 {
-    return _solution_size;
-}
-
-void SetUpParams::setIndependent_runs(const unsigned int runs)
-{
-    _independent_runs = runs;
-}
-void SetUpParams::setNb_evolution_steps(const unsigned int steps)
-{
-    _nb_evolution_steps = steps;
-}
-void SetUpParams::setPopulation_size(const unsigned int pop)
-{
-    _population_size = pop;
-}
-void SetUpParams::setSolution_size(const unsigned int sol)
-{
-    _solution_size = sol;
-}
-
-SetUpParams::~SetUpParams()
-{
+    return  _number_of_empires;
 
 }
 
-std::istream& operator>> (std::istream& ist, SetUpParams setup)
+void SetUpParams::set_independent_runs(unsigned int independent_runs)
 {
-    unsigned int runs, steps, population, solution;
+   _independent_runs=independent_runs;
+}
+void SetUpParams::set_number_of_iterations(unsigned int number_of_iterations)
+{
+    _number_of_iterations=number_of_iterations;
+}
+void SetUpParams::set_number_of_countries(unsigned int number_of_countries)
+{
+    _number_of_countries=number_of_countries;
+}
+void SetUpParams::set_number_of_empires(unsigned int number_of_empires)
+{
+    _number_of_empires=number_of_empires;
+}
+istream& operator>> (istream& ist, SetUpParams& setup)
+{
+    unsigned int runs, steps, country, empire;
 
-    std::cout<<"\t\t\t The rapameters : \n\n";
-    std::cout<<"\t\t\t Nombre d'execution : ";
+    cout<<"\t\t\t The rapameters : \n\n";
+    cout<<"\t\t\t Nombre d'execution : ";
 	ist>>runs;
-	std::cout<<"\t\t\t Nombre d'iteration : ";
+	cout<<"\t\t\t Nombre d'iteration : ";
 	ist>>steps;
-	std::cout<<"\t\t\t Population : ";
-	ist>>population;
-	std::cout<<"\t\t\t Solution : ";
-	ist>>solution;
+	cout<<"\t\t\t pays : ";
+	ist>>country;
+	cout<<"\t\t\t empire : ";
+	ist>>empire;
 
 	if (ist.good())
 	{
-		setup.setIndependent_runs(runs);
-		setup.setNb_evolution_steps(steps);
-		setup.setPopulation_size(population);
-		setup.setSolution_size(solution);
+		setup.set_independent_runs(runs);
+		setup.set_number_of_iterations(steps);
+		setup.set_number_of_countries(country);
+		setup.set_number_of_empires(empire);
 	}
 	return ist;
 }
 
-std::ostream& operator<<(std::ostream& ost, SetUpParams& setup)
+SetUpParams::~SetUpParams()
 {
-    ost<<setup.getIndependent_runs()<< std::endl;
-    ost<<setup.getNb_evolution_steps()<< std::endl;
-    ost<<setup.getPopulation_size()<< std::endl;
-    ost<<setup.getSolution_size()<< std::endl;
-
-    return ost;
+    //dtor
 }
