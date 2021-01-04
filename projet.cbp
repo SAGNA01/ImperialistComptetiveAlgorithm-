@@ -34,15 +34,17 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="include/Country.h" />
+		<Unit filename="include/Empire.h" />
+		<Unit filename="include/OptimizationAlgorithm.h" />
 		<Unit filename="include/Problem.h" />
 		<Unit filename="include/SetUpParams.h" />
-		<Unit filename="include/Solution.h" />
-		<Unit filename="include/optimizationAlgorithm.h" />
+		<Unit filename="src/Country.cpp" />
+		<Unit filename="src/Empire.cpp" />
+		<Unit filename="src/OptimizationAlgorithm.cpp" />
 		<Unit filename="src/Problem.cpp" />
 		<Unit filename="src/SetUpParams.cpp" />
-		<Unit filename="src/Solution.cpp" />
-		<Unit filename="src/ica.cpp" />
-		<Unit filename="src/optimizationAlgorithm.cpp" />
+		<Unit filename="src/main.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
