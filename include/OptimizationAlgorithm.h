@@ -14,7 +14,7 @@
 
 #include"SetUpParams.h"
 #include"Problem.h"
-#include"Country.h"
+#include"CountrySolution.h"
 #include"Empire.h"
 
 using namespace std;
@@ -40,7 +40,7 @@ class OptimizationAlgorithm
 
     private:
      double bestSolution;
-     vector<Country*>  _countries;
+     vector<CountrySolution*>  _countries;
      vector<Empire*>  _empires;
      const SetUpParams& _setup;
      const Problem& _pbm;

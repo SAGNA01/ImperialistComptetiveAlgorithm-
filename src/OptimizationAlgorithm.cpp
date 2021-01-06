@@ -12,7 +12,7 @@ OptimizationAlgorithm::~OptimizationAlgorithm()
 
 void OptimizationAlgorithm::removeEmpire(int index)
 {
-    _empires[index]=_empires.back();
+    _empires[index] =_empires.back();
     _empires.pop_back();
 }
 
@@ -22,7 +22,7 @@ void OptimizationAlgorithm::createCountries()
     int number_of_countries = _setup.get_number_of_countries();
     for (int i = 0; i < number_of_countries; i++)
     {
-        Country *c = new Country(_pbm);
+        CountrySolution *c = new CountrySolution(_pbm);
         _countries.push_back(c);
     }
     for (int i = 0; i < number_of_countries; i++)
@@ -31,19 +31,15 @@ void OptimizationAlgorithm::createCountries()
         {
             if (_countries[i]->get_fitness() > _countries[j]->get_fitness() )
             {
-                Country *temp =  _countries[i];
-                _countries[i]=_countries[j];
-                _countries[j]=temp;
-
+                CountrySolution *temp =  _countries[i];
+                _countries[i] =_countries[j];
+                _countries[j] = temp;
             }
         }
-
     }
-
-
-
 }
 
+//Creation of initial empires
 void OptimizationAlgorithm::createEmpires()
 {
     _empires.clear();
@@ -54,11 +50,9 @@ void OptimizationAlgorithm::createEmpires()
         Empire *e = new Empire();
 
         e->addColony(_countries[i]);
-
         _empires.push_back(e) ;
-
-
     }
+
     double alpha_rate =_setup.get_alpha_rate();
     double max_cost=  _empires[number_of_empires-1]->getCost();
 
@@ -66,18 +60,16 @@ void OptimizationAlgorithm::createEmpires()
     double sumP=0.0;
     for (int i = 0; i < _empires.size(); i++)
     {
-
         P.push_back(exp((-alpha_rate * _empires[i]->getCost())/max_cost));
         sumP += P[i];
     }
-    for (int i = 0; i < P.size(); i++)
+    for (unsigned int i = 0; i < P.size(); i++)
     {
         P[i]=P[i]/sumP;
         if (i>0)
         {
             P[i]= P[i]+ P[i-1];
         }
-
     }
 
     srand(time(0));
@@ -86,40 +78,31 @@ void OptimizationAlgorithm::createEmpires()
 
         double r = ((double) rand()  / (RAND_MAX));
 
-
         int k = 0;
         while (P[k]<r && k<number_of_empires)
         {
             k++;
         }
-
         _empires[k]->addColony(_countries[i]);
-
     }
-
 }
 
+//Assimilation;  Movement of colonies toward imperialists
 void OptimizationAlgorithm::assimilate()
 {
     unsigned int number_of_empires =  _empires.size();
     double assimilation_rate = _setup.get_assimilation_rate();
     if (number_of_empires!=0)
     {
-
-
         for (unsigned int i = 0; i < number_of_empires; i++)
         {
-
-            Country* empire_representation = _empires[i]->bestSolution();
+            CountrySolution* empire_representation = _empires[i]->bestSolution();
             int numberOfColonies = _empires[i]->getNumberOfColonies();
             if (numberOfColonies!= 0)
             {
-
                 for ( int j = 0; j < numberOfColonies; j++)
                 {
-
-
-                    Country*  colony_representation =  _empires[i]->getColony(j);
+                    CountrySolution*  colony_representation =  _empires[i]->getColony(j);
                     int colony_size =(int)colony_representation->getCountry().size();
                     int number_of_tasks = (int)(colony_size*assimilation_rate);
                     vector<double> colony =  colony_representation->getCountry();
@@ -132,7 +115,6 @@ void OptimizationAlgorithm::assimilate()
                     colony_representation->setCountry(colony);
                     _empires[i]->replaceColony(j,colony_representation);
 
-
                     }
             }
             else
@@ -142,13 +124,10 @@ void OptimizationAlgorithm::assimilate()
             }
         }
     }
-
 }
 
 void OptimizationAlgorithm::revolution()
 {
-
-
     double revolution_probability = _setup.get_revolution_probability();
     double revolution_rate = _setup.get_revolution_rate();
     vector<int> exchange_temp;
@@ -171,7 +150,7 @@ void OptimizationAlgorithm::revolution()
                 exchange.clear();
                 exchange_candidates.clear();
                 candidates.clear();
-                Country*  colony_representation =  _empires[i]->getColony(j);
+                CountrySolution*  colony_representation =  _empires[i]->getColony(j);
                 srand(time(0));
                 double oldCost = colony_representation->get_fitness();
                 int colony_size =(int)colony_representation->getCountry().size();
@@ -213,18 +192,16 @@ void OptimizationAlgorithm::revolution()
                         exchange_candidates.push_back(index);
                 }
 
-                Country*  new_colony_representation = colony_representation;
+                CountrySolution*  new_colony_representation = colony_representation;
                 vector<double>& new_colony_representation_= new_colony_representation->getCountry();
                 vector<double>& colony_representation_= colony_representation ->getCountry();
 
-                for ( int  k = 0; k < number_of_tasks; k++)
+                for (int  k = 0; k < number_of_tasks; k++)
                 {
                     if (exchange_candidates[k] <  new_colony_representation_.size()  && candidates[k]<  new_colony_representation_.size())
                     {
-
                         new_colony_representation_[exchange_candidates[k]] =colony_representation_[candidates[k]];
                         new_colony_representation_[candidates[k]]= colony_representation_[exchange_candidates[k]];
-
                     }
                 }
 
@@ -233,21 +210,17 @@ void OptimizationAlgorithm::revolution()
                 if (new_colony_representation->get_fitness() < oldCost)
                 {
                     _empires[i]->replaceColony(j,new_colony_representation);
-
                 }
-
             }
         }
-
-
     }
-
 }
 
+// Imperialistic competition
 void OptimizationAlgorithm::interEmpireWar()
 {
 
-    if(_empires.size()>=1)
+    if(_empires.size() >= 1)
     {
         int weakest_empire_index = 0;
 
@@ -260,7 +233,6 @@ void OptimizationAlgorithm::interEmpireWar()
                 weakest_empire_index = i ;
             }
         }
-
 
         double alpha_rate =_setup.get_alpha_rate();
 
@@ -276,10 +248,8 @@ void OptimizationAlgorithm::interEmpireWar()
             }
             else
             {
-
                 P.push_back(exp((-alpha_rate * _empires[i]->getCost())/max_cost));
                 sumP += P[i];
-
             }
 
         }
@@ -296,7 +266,7 @@ void OptimizationAlgorithm::interEmpireWar()
             int  weakest_colony_index= _empires[weakest_empire_index]->weakestColonyIndex();
 
 
-            int winning_empire_index =0;
+            int winning_empire_index = 0;
             double r = ((double) rand() / (RAND_MAX));
             while (P[winning_empire_index]<r && winning_empire_index<_empires.size()-1)
             {
@@ -304,14 +274,12 @@ void OptimizationAlgorithm::interEmpireWar()
             }
             _empires.at(winning_empire_index)->addColony( _empires[weakest_empire_index]->getColony(weakest_colony_index));
             _empires.at(weakest_empire_index)->removeColony(weakest_colony_index);
-
         }
         srand(time(0));
         if (_empires[weakest_empire_index]->getNumberOfColonies() == 1)
         {
-
-            Country* weakest_colony = _empires[weakest_empire_index]->getColony(0);
-            int winning_empire_index =0;
+            CountrySolution* weakest_colony = _empires[weakest_empire_index]->getColony(0);
+            int winning_empire_index = 0;
 
             double r = ((double) rand() / (RAND_MAX));
             while (P[winning_empire_index]<r && winning_empire_index<(int)_empires.size())
@@ -320,12 +288,8 @@ void OptimizationAlgorithm::interEmpireWar()
             }
             _empires[winning_empire_index]->addColony(weakest_colony);
             removeEmpire(weakest_empire_index);
-
         }
-
-
     }
-
 }
 
 Empire* OptimizationAlgorithm::bestEmpire()
@@ -337,19 +301,17 @@ Empire* OptimizationAlgorithm::bestEmpire()
         {
             best=_empires[i];
         }
-
     }
     return best;
 }
 void OptimizationAlgorithm::run()
 {
-    int nbiter= _setup.get_number_of_iterations();
-    int nbrun =_setup.get_independent_runs();
+    unsigned int nbiter = _setup.get_number_of_iterations();
+    unsigned int nbrun =_setup.get_independent_runs();
     char c = '0';
 
     for(unsigned int runs = 0; runs < nbrun; runs++)
     {
-
         createCountries();
         createEmpires();
         c += 1;
@@ -361,7 +323,6 @@ void OptimizationAlgorithm::run()
 
         for(unsigned int iter = 0; iter < nbiter; iter++)
         {
-
             assimilate();
             revolution();
             interEmpireWar();
@@ -373,17 +334,11 @@ void OptimizationAlgorithm::run()
             MyFile << ";";
             MyFile <<bestSolution;
             MyFile << "\n";
-       cout << "Best solution iteration :" << bestSolution << endl;
-
+            cout << "Best solution of  iteration : " <<  iter<<" "<< bestSolution << endl;
         }
+
         MyFile.close();
-        cout<<"Execution  run "<< runs+1  <<endl;
-
+        cout<<"Execution run "<< runs+1  <<endl;
         cout << "Best solution :" << bestSolution << endl;
-
-
     }
-
-
-
 }

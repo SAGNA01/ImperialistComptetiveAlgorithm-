@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Country.h"
+#include "CountrySolution.h"
 #include "Empire.h"
 #include "Problem.h"
 #include "SetUpParams.h"

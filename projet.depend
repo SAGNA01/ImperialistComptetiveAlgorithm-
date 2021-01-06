@@ -10,14 +10,14 @@
 	<vector>
 	<ctime>
 
-1609765280 d:\202021\uha\ia\projet-cb\ica-project\include\setupparams.h
+1609894831 d:\202021\uha\ia\projet-cb\ica-project\include\setupparams.h
 	<iostream>
 	<cmath>
 
 1609605254 source:d:\202021\uha\ia\projet-cb\ica-project\src\problem.cpp
 	"Problem.h"
 
-1609691536 source:d:\202021\uha\ia\projet-cb\ica-project\src\setupparams.cpp
+1609894104 source:d:\202021\uha\ia\projet-cb\ica-project\src\setupparams.cpp
 	"SetUpParams.h"
 
 1609015967 source:d:\202021\uha\ia\projet-cb\ica-project\src\solution.cpp
@@ -28,7 +28,7 @@
 	"Problem.h"
 	<vector>
 
-1609764092 d:\202021\uha\ia\projet-cb\ica-project\include\optimizationalgorithm.h
+1609894406 d:\202021\uha\ia\projet-cb\ica-project\include\optimizationalgorithm.h
 	<vector>
 	<algorithm>
 	<iostream>
@@ -41,34 +41,43 @@
 	<fstream>
 	"SetUpParams.h"
 	"Problem.h"
-	"Country.h"
+	"CountrySolution.h"
 	"Empire.h"
 
-1609770512 source:d:\202021\uha\ia\projet-cb\ica-project\src\optimizationalgorithm.cpp
+1609896523 source:d:\202021\uha\ia\projet-cb\ica-project\src\optimizationalgorithm.cpp
 	"OptimizationAlgorithm.h"
 
-1609771199 source:d:\202021\uha\ia\projet-cb\ica-project\src\country.cpp
+1609844524 source:d:\202021\uha\ia\projet-cb\ica-project\src\country.cpp
 	"Country.h"
 
-1609600160 d:\202021\uha\ia\projet-cb\ica-project\include\country.h
+1609841967 d:\202021\uha\ia\projet-cb\ica-project\include\country.h
 	<cmath>
 	"Problem.h"
 	<vector>
 	<ctime>
 
-1609771591 source:d:\202021\uha\ia\projet-cb\ica-project\src\empire.cpp
+1609894503 source:d:\202021\uha\ia\projet-cb\ica-project\src\empire.cpp
 	"Empire.h"
 
-1609679622 d:\202021\uha\ia\projet-cb\ica-project\include\empire.h
-	"Country.h"
+1609894278 d:\202021\uha\ia\projet-cb\ica-project\include\empire.h
+	"CountrySolution.h"
 	<vector>
 	<ctime>
 
-1609673456 source:d:\202021\uha\ia\projet-cb\ica-project\src\main.cpp
+1609892899 source:d:\202021\uha\ia\projet-cb\ica-project\src\main.cpp
 	<iostream>
-	"Country.h"
+	"CountrySolution.h"
 	"Empire.h"
 	"Problem.h"
 	"SetUpParams.h"
 	"OptimizationAlgorithm.h"
+
+1609894051 source:d:\202021\uha\ia\projet-cb\ica-project\src\countrysolution.cpp
+	"CountrySolution.h"
+
+1609893886 d:\202021\uha\ia\projet-cb\ica-project\include\countrysolution.h
+	<cmath>
+	"Problem.h"
+	<vector>
+	<ctime>
 

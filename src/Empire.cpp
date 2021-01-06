@@ -12,19 +12,19 @@ Empire::~Empire()
 double Empire::calculateCost()
 {
     cost = 0.0;
-
-if (_colonies.size()>0){
+    if (_colonies.size()>0)
+    {
         for( unsigned int i=0; i <_colonies.size(); i++ )
         {
             cost = cost+ _colonies.at(i)->get_fitness();
         }
-}
+    }
     return cost;
 }
 
-void Empire::replaceColony(int index, Country* colony)
+void Empire::replaceColony(int index, CountrySolution* colony)
 {
-    _colonies[index]=colony;
+    _colonies[index] = colony;
     calculateCost();
 }
 
@@ -33,7 +33,6 @@ void Empire::deleteColony(int index)
     _colonies[index]=_colonies.back();
     _colonies.pop_back();
     calculateCost();
-
 }
 
 double Empire::getCost()
@@ -41,15 +40,14 @@ double Empire::getCost()
     return cost;
 }
 
-void Empire::addColony( Country* colony)
+void Empire::addColony(CountrySolution* colony)
 {
-    _colonies.push_back(colony);
+   _colonies.push_back(colony);
    calculateCost();
 }
 
 void Empire::removeColony(int index)
 {
-
     _colonies[index]=_colonies.back();
     _colonies.pop_back();
     calculateCost();
@@ -60,15 +58,15 @@ int Empire::getNumberOfColonies()
     return   _colonies.size();
 }
 
-Country* Empire::getColony(int index)
+CountrySolution* Empire::getColony(int index)
 {
     return  _colonies[index];
 }
-Country* Empire::bestSolution()
+CountrySolution* Empire::bestSolution()
 {
     if (_colonies.size()>0)
     {
-        Country* best =  _colonies[0];
+        CountrySolution* best =  _colonies[0];
         for (unsigned int i = 1; i < _colonies.size(); i++)
         {
             if (_colonies[i]->get_fitness() < best->get_fitness() )
@@ -84,9 +82,9 @@ Country* Empire::bestSolution()
     }
 }
 
-Country* Empire::weakesSolution()
+CountrySolution* Empire::weakesSolution()
 {
-    Country* weakes =  _colonies[0];
+    CountrySolution* weakes =  _colonies[0];
     if ( _colonies.size()>0)
     {
         for (unsigned int i = 1; i < _colonies.size(); i++)
@@ -114,7 +112,6 @@ int Empire::weakestColonyIndex()
         }
     }
     return weakesIndex;
-
 }
 int Empire::bestColonyIndex()
 {
@@ -134,7 +131,6 @@ int Empire::bestColonyIndex()
     {
         return NULL ;
     }
-
 }
 
 

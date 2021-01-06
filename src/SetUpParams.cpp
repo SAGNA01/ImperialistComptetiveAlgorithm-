@@ -1,9 +1,9 @@
 #include "SetUpParams.h"
 
 SetUpParams::SetUpParams():_independent_runs(1), _number_of_iterations((int)(2000)),
-    _number_of_countries(200), _number_of_empires(8)
+                           _number_of_countries(200), _number_of_empires(8)
 {
-    //ctor
+
 }
 SetUpParams::SetUpParams(unsigned int independent_runs, unsigned int number_of_iterations,unsigned int number_of_countries, unsigned int number_of_empires):_independent_runs(independent_runs), _number_of_iterations(number_of_iterations),
     _number_of_countries(number_of_countries), _number_of_empires(number_of_empires)
@@ -59,7 +59,6 @@ unsigned int SetUpParams::get_number_of_countries() const
 unsigned int SetUpParams::get_number_of_empires() const
 {
     return  _number_of_empires;
-
 }
 
 void SetUpParams::set_independent_runs(unsigned int independent_runs)
